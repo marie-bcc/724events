@@ -29,16 +29,41 @@ describe("When Form is created", () => {
 
 
 describe("When a page is created", () => {
-  it("a list of events is displayed", () => {
-    // to implement
-  })
-  it("a list a people is displayed", () => {
-    // to implement
-  })
-  it("a footer is displayed", () => {
-    // to implement
-  })
-  it("an event card, with the last event, is displayed", () => {
-    // to implement
-  })
+
+  // Test pour vérifier que la liste des événements est affichée
+  it("a list of events is displayed", async () => {
+    render(<Home />);
+    await screen.findByText("Nos réalisations");  
+    const eventList = await screen.findByTestId("event-list");  
+    expect(eventList).toBeInTheDocument();
+  });
+
+  // Test pour vérifier que la liste des membres de l'équipe est affichée
+  it("a list of people is displayed", async () => {
+    render(<Home />);
+    await screen.findByText("Notre équipe");  
+    const peopleList = await screen.findByTestId("people-list");  
+    expect(peopleList).toBeInTheDocument();
+  });
+
+  // Test pour vérifier que le pied de page est affiché
+  it("a footer is displayed", async () => {
+    render(<Home />);
+    const footer = await screen.findByTestId("footer");  
+    expect(footer).toBeInTheDocument();
+    expect(screen.getByText("Contactez-nous")).toBeInTheDocument();
+  });
+
+  // Test pour vérifier qu'une carte d'événement, avec le dernier événement, est affichée
+  it("an event card, with the last event, is displayed", async () => {
+    render(<Home />);
+    const lastEventCard = await screen.findByTestId("last-event-card");  
+    expect(lastEventCard).toBeInTheDocument();
+    expect(screen.getByText("boom")).toBeInTheDocument();
+  });
+
 });
+
+
+
+
