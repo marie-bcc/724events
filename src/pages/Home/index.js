@@ -14,6 +14,7 @@ import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
   const {last} = useData()
+ 
   return <>
     <header>
       <Menu />
@@ -95,8 +96,8 @@ const Page = () => {
         <h2 className="Title">Contact</h2>
         <Modal
           Content={
-            <div data-testid="success-message" className="ModalMessage--success">
-              <div>Message envoyé !</div>
+            <div  className="ModalMessage--success">
+              <div data-testid="success-message">Message envoyé !</div>
               <p>
                 Merci pour votre message nous tâcherons de vous répondre dans
                 les plus brefs délais

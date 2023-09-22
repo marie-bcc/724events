@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Home from "./index";
 import Page from "./index";
+import { waitFor } from "@testing-library/react";
 
 describe("When Form is created", () => {
   it("a list of fields card is displayed", async () => {
@@ -22,7 +23,8 @@ describe("When Form is created", () => {
         })
       );
       await screen.findByText("En cours"); 
-      await screen.findByTestId("success-message"); 
+      await waitFor(() => screen.getByTestId("success-message"));
+
     });
   });
 });
