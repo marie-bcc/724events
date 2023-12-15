@@ -1,7 +1,9 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+// @ts-nocheck
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+// eslint-disable-next-line import/no-duplicates
 import Home from "./index";
+// eslint-disable-next-line import/no-duplicates
 import Page from "./index";
-import { waitFor } from "@testing-library/react";
 
 describe("When Form is created", () => {
   it("a list of fields card is displayed", async () => {
@@ -22,33 +24,31 @@ describe("When Form is created", () => {
           bubbles: true,
         })
       );
-      await screen.findByText("En cours"); 
+      await screen.findByText("En cours");
       await waitFor(() => screen.getByTestId("success-message"));
-
     });
   });
 });
 
 // Mockez le hook useData
-jest.mock('../../contexts/DataContext', () => ({
+jest.mock("../../contexts/DataContext", () => ({
   useData: () => ({
     last: {
-      cover: '/path/to/fake/image.jpg',
-      title: 'Fake Event',
-      date: '2023-09-21',
+      cover: "/path/to/fake/image.jpg",
+      title: "Fake Event",
+      date: "2023-09-21",
     },
   }),
 }));
 
 describe("When a page is created", () => {
-
   // Test pour vérifier que la liste des événements est affichée
   it("displays the list of events", () => {
-    render(<Page/>);
+    render(<Page />);
     const eventsTitle = screen.getByTestId("Nos réalisations");
     expect(eventsTitle).toBeInTheDocument();
   });
-  
+
   // Test pour vérifier que la liste des membres de l'équipe est affichée
   it("displays the team members list", () => {
     render(<Page />);
@@ -57,16 +57,14 @@ describe("When a page is created", () => {
 
     const samiraName = screen.getByText("Samira");
     expect(samiraName).toBeInTheDocument();
-
-
   });
 
   // Test pour vérifier que le pied de page est affiché
   it("displays the footer", () => {
-    render(<Page/>);
+    render(<Page />);
     const contactInfo = screen.getByText("Contactez-nous");
     expect(contactInfo).toBeInTheDocument();
-    
+
     const description = screen.getByText(/^Une agence événementielle/);
     expect(description).toBeInTheDocument();
   });
@@ -78,12 +76,7 @@ describe("When a page is created", () => {
     expect(lastEventTitle).toBeInTheDocument();
 
     // Vous pouvez également vérifier d'autres éléments de cette carte, comme la date ou le label "boom"
-    const boomLabel = screen.getByText('boom');
+    const boomLabel = screen.getByText("boom");
     expect(boomLabel).toBeInTheDocument();
   });
 });
-
-
-
-
-
